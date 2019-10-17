@@ -30,6 +30,13 @@ namespace MyCompanyName.AbpZeroTemplate.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var orderedProducts = pages.CreateChildPermission(AppPermissions.Pages_OrderedProducts, L("OrderedProducts"));
+            orderedProducts.CreateChildPermission(AppPermissions.Pages_OrderedProducts_Create, L("CreateNewOrderedProduct"));
+            orderedProducts.CreateChildPermission(AppPermissions.Pages_OrderedProducts_Edit, L("EditOrderedProduct"));
+            orderedProducts.CreateChildPermission(AppPermissions.Pages_OrderedProducts_Delete, L("DeleteOrderedProduct"));
+
+
+
             var quotationItems = pages.CreateChildPermission(AppPermissions.Pages_QuotationItems, L("QuotationItems"));
             quotationItems.CreateChildPermission(AppPermissions.Pages_QuotationItems_Create, L("CreateNewQuotationItem"));
             quotationItems.CreateChildPermission(AppPermissions.Pages_QuotationItems_Edit, L("EditQuotationItem"));

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
+    <text name="OrderedProduct">Ordered product</text>
+    <text name="OrderedProductsHeaderInfo">Ordered products header info</text>
+    <text name="CreateNewOrderedProduct">Create new ordered product</text>
+    <text name="EditOrderedProduct">Edit ordered product</text>
+    <text name="DeleteOrderedProduct">Delete ordered product</text>
+    <text name="OrderedProducts">Ordered products</text>
+    <text name="QuotationItemDescription">Quotation item description</text>
+    <text name="PickQuotationItem">Pick quotation item</text>
     <text name="TotalAmountInETB">Total amount in e t b</text>
     <text name="QuotationItem">Quotation item</text>
     <text name="UnitOfMeasurement">Unit of measurement</text>

@@ -43,6 +43,8 @@ namespace MyCompanyName.AbpZeroTemplate
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+           configuration.CreateMap<CreateOrEditOrderedProductDto, OrderedProduct>();
+           configuration.CreateMap<OrderedProduct, OrderedProductDto>();
            configuration.CreateMap<CreateOrEditQuotationItemDto, QuotationItem>();
            configuration.CreateMap<QuotationItem, QuotationItemDto>();
            configuration.CreateMap<CreateOrEditQuotationUnitPriceDto, QuotationUnitPrice>();

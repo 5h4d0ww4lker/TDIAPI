@@ -16,6 +16,8 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
 {
     public class AbpZeroTemplateDbContext : AbpZeroDbContext<Tenant, Role, User, AbpZeroTemplateDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
+
         public virtual DbSet<QuotationItem> QuotationItems { get; set; }
 
         public virtual DbSet<QuotationUnitPrice> QuotationUnitPrices { get; set; }
