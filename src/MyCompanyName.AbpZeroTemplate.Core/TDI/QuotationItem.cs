@@ -17,10 +17,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
     {
 
 		[Required]
-		[StringLength(QuotationItemConsts.MaxUnitOfMeasurementLength, MinimumLength = QuotationItemConsts.MinUnitOfMeasurementLength)]
-		public virtual string UnitOfMeasurement { get; set; }
-		
-		[Required]
 		[StringLength(QuotationItemConsts.MaxQuantityLength, MinimumLength = QuotationItemConsts.MinQuantityLength)]
 		public virtual string Quantity { get; set; }
 		

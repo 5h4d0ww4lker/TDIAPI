@@ -36,10 +36,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
          {
 			
 			var filteredProductCategories = _productCategoryRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Material.Contains(input.Filter) || e.Extruder.Contains(input.Filter) || e.Pipehead.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Material.Contains(input.Filter) || e.UOM.Contains(input.Filter) || e.Description.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.MaterialFilter),  e => e.Material.ToLower() == input.MaterialFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ExtruderFilter),  e => e.Extruder.ToLower() == input.ExtruderFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeheadFilter),  e => e.Pipehead.ToLower() == input.PipeheadFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.UOMFilter),  e => e.UOM.ToLower() == input.UOMFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim());
 
 			var pagedAndFilteredProductCategories = filteredProductCategories
                 .OrderBy(input.Sorting ?? "id asc")
@@ -50,8 +50,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 							ProductCategory = new ProductCategoryDto
 							{
                                 Material = o.Material,
-                                Extruder = o.Extruder,
-                                Pipehead = o.Pipehead,
+                                UOM = o.UOM,
+                                Description = o.Description,
                                 Id = o.Id
 							}
 						};
@@ -120,18 +120,18 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
          {
 			
 			var filteredProductCategories = _productCategoryRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Material.Contains(input.Filter) || e.Extruder.Contains(input.Filter) || e.Pipehead.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Material.Contains(input.Filter) || e.UOM.Contains(input.Filter) || e.Description.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.MaterialFilter),  e => e.Material.ToLower() == input.MaterialFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ExtruderFilter),  e => e.Extruder.ToLower() == input.ExtruderFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeheadFilter),  e => e.Pipehead.ToLower() == input.PipeheadFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.UOMFilter),  e => e.UOM.ToLower() == input.UOMFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim());
 
 			var query = (from o in filteredProductCategories
                          select new GetProductCategoryForViewDto() { 
 							ProductCategory = new ProductCategoryDto
 							{
                                 Material = o.Material,
-                                Extruder = o.Extruder,
-                                Pipehead = o.Pipehead,
+                                UOM = o.UOM,
+                                Description = o.Description,
                                 Id = o.Id
 							}
 						 });

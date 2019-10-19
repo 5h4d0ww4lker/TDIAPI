@@ -9,9 +9,9 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string MaterialFilter { get; set; }
 
-		public string ExtruderFilter { get; set; }
+		public string UOMFilter { get; set; }
 
-		public string PipeheadFilter { get; set; }
+		public string DescriptionFilter { get; set; }
 
 
 

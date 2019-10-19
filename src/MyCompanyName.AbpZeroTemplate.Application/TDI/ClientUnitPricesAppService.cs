@@ -26,15 +26,15 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		 private readonly IRepository<ClientUnitPrice> _clientUnitPriceRepository;
 		 private readonly IClientUnitPricesExcelExporter _clientUnitPricesExcelExporter;
 		 private readonly IRepository<Client,int> _lookup_clientRepository;
-		 private readonly IRepository<ProductSubCategory,int> _lookup_productSubCategoryRepository;
+		 private readonly IRepository<ProductCategory,int> _lookup_productCategoryRepository;
 		 
 
-		  public ClientUnitPricesAppService(IRepository<ClientUnitPrice> clientUnitPriceRepository, IClientUnitPricesExcelExporter clientUnitPricesExcelExporter , IRepository<Client, int> lookup_clientRepository, IRepository<ProductSubCategory, int> lookup_productSubCategoryRepository) 
+		  public ClientUnitPricesAppService(IRepository<ClientUnitPrice> clientUnitPriceRepository, IClientUnitPricesExcelExporter clientUnitPricesExcelExporter , IRepository<Client, int> lookup_clientRepository, IRepository<ProductCategory, int> lookup_productCategoryRepository) 
 		  {
 			_clientUnitPriceRepository = clientUnitPriceRepository;
 			_clientUnitPricesExcelExporter = clientUnitPricesExcelExporter;
 			_lookup_clientRepository = lookup_clientRepository;
-		_lookup_productSubCategoryRepository = lookup_productSubCategoryRepository;
+		_lookup_productCategoryRepository = lookup_productCategoryRepository;
 		
 		  }
 
@@ -43,13 +43,12 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 			
 			var filteredClientUnitPrices = _clientUnitPriceRepository.GetAll()
 						.Include( e => e.ClientFk)
-						.Include( e => e.ProductSubCategoryFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Unit.Contains(input.Filter) || e.Price.Contains(input.Filter))
+						.Include( e => e.ProductCategoryFk)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Price.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitFilter),  e => e.Unit.ToLower() == input.UnitFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PriceFilter),  e => e.Price.ToLower() == input.PriceFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ClientClientNameFilter), e => e.ClientFk != null && e.ClientFk.ClientName.ToLower() == input.ClientClientNameFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductSubCategoryPipeDiameterFilter), e => e.ProductSubCategoryFk != null && e.ProductSubCategoryFk.PipeDiameter.ToLower() == input.ProductSubCategoryPipeDiameterFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim());
 
 			var pagedAndFilteredClientUnitPrices = filteredClientUnitPrices
                 .OrderBy(input.Sorting ?? "id asc")
@@ -59,19 +58,18 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                          join o1 in _lookup_clientRepository.GetAll() on o.ClientId equals o1.Id into j1
                          from s1 in j1.DefaultIfEmpty()
                          
-                         join o2 in _lookup_productSubCategoryRepository.GetAll() on o.ProductSubCategoryId equals o2.Id into j2
+                         join o2 in _lookup_productCategoryRepository.GetAll() on o.ProductCategoryId equals o2.Id into j2
                          from s2 in j2.DefaultIfEmpty()
                          
                          select new GetClientUnitPriceForViewDto() {
 							ClientUnitPrice = new ClientUnitPriceDto
 							{
                                 Description = o.Description,
-                                Unit = o.Unit,
                                 Price = o.Price,
                                 Id = o.Id
 							},
                          	ClientClientName = s1 == null ? "" : s1.ClientName.ToString(),
-                         	ProductSubCategoryPipeDiameter = s2 == null ? "" : s2.PipeDiameter.ToString()
+                         	ProductCategoryMaterial = s2 == null ? "" : s2.Material.ToString()
 						};
 
             var totalCount = await filteredClientUnitPrices.CountAsync();
@@ -94,10 +92,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                 output.ClientClientName = _lookupClient.ClientName.ToString();
             }
 
-		    if (output.ClientUnitPrice.ProductSubCategoryId != null)
+		    if (output.ClientUnitPrice.ProductCategoryId != null)
             {
-                var _lookupProductSubCategory = await _lookup_productSubCategoryRepository.FirstOrDefaultAsync((int)output.ClientUnitPrice.ProductSubCategoryId);
-                output.ProductSubCategoryPipeDiameter = _lookupProductSubCategory.PipeDiameter.ToString();
+                var _lookupProductCategory = await _lookup_productCategoryRepository.FirstOrDefaultAsync((int)output.ClientUnitPrice.ProductCategoryId);
+                output.ProductCategoryMaterial = _lookupProductCategory.Material.ToString();
             }
 			
             return output;
@@ -116,10 +114,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                 output.ClientClientName = _lookupClient.ClientName.ToString();
             }
 
-		    if (output.ClientUnitPrice.ProductSubCategoryId != null)
+		    if (output.ClientUnitPrice.ProductCategoryId != null)
             {
-                var _lookupProductSubCategory = await _lookup_productSubCategoryRepository.FirstOrDefaultAsync((int)output.ClientUnitPrice.ProductSubCategoryId);
-                output.ProductSubCategoryPipeDiameter = _lookupProductSubCategory.PipeDiameter.ToString();
+                var _lookupProductCategory = await _lookup_productCategoryRepository.FirstOrDefaultAsync((int)output.ClientUnitPrice.ProductCategoryId);
+                output.ProductCategoryMaterial = _lookupProductCategory.Material.ToString();
             }
 			
             return output;
@@ -163,31 +161,29 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 			
 			var filteredClientUnitPrices = _clientUnitPriceRepository.GetAll()
 						.Include( e => e.ClientFk)
-						.Include( e => e.ProductSubCategoryFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Unit.Contains(input.Filter) || e.Price.Contains(input.Filter))
+						.Include( e => e.ProductCategoryFk)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Price.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitFilter),  e => e.Unit.ToLower() == input.UnitFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PriceFilter),  e => e.Price.ToLower() == input.PriceFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ClientClientNameFilter), e => e.ClientFk != null && e.ClientFk.ClientName.ToLower() == input.ClientClientNameFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductSubCategoryPipeDiameterFilter), e => e.ProductSubCategoryFk != null && e.ProductSubCategoryFk.PipeDiameter.ToLower() == input.ProductSubCategoryPipeDiameterFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim());
 
 			var query = (from o in filteredClientUnitPrices
                          join o1 in _lookup_clientRepository.GetAll() on o.ClientId equals o1.Id into j1
                          from s1 in j1.DefaultIfEmpty()
                          
-                         join o2 in _lookup_productSubCategoryRepository.GetAll() on o.ProductSubCategoryId equals o2.Id into j2
+                         join o2 in _lookup_productCategoryRepository.GetAll() on o.ProductCategoryId equals o2.Id into j2
                          from s2 in j2.DefaultIfEmpty()
                          
                          select new GetClientUnitPriceForViewDto() { 
 							ClientUnitPrice = new ClientUnitPriceDto
 							{
                                 Description = o.Description,
-                                Unit = o.Unit,
                                 Price = o.Price,
                                 Id = o.Id
 							},
                          	ClientClientName = s1 == null ? "" : s1.ClientName.ToString(),
-                         	ProductSubCategoryPipeDiameter = s2 == null ? "" : s2.PipeDiameter.ToString()
+                         	ProductCategoryMaterial = s2 == null ? "" : s2.Material.ToString()
 						 });
 
 
@@ -228,29 +224,29 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
          }
 
 		[AbpAuthorize(AppPermissions.Pages_ClientUnitPrices)]
-         public async Task<PagedResultDto<ClientUnitPriceProductSubCategoryLookupTableDto>> GetAllProductSubCategoryForLookupTable(GetAllForLookupTableInput input)
+         public async Task<PagedResultDto<ClientUnitPriceProductCategoryLookupTableDto>> GetAllProductCategoryForLookupTable(GetAllForLookupTableInput input)
          {
-             var query = _lookup_productSubCategoryRepository.GetAll().WhereIf(
+             var query = _lookup_productCategoryRepository.GetAll().WhereIf(
                     !string.IsNullOrWhiteSpace(input.Filter),
-                   e=> e.PipeDiameter.ToString().Contains(input.Filter)
+                   e=> e.Material.ToString().Contains(input.Filter)
                 );
 
             var totalCount = await query.CountAsync();
 
-            var productSubCategoryList = await query
+            var productCategoryList = await query
                 .PageBy(input)
                 .ToListAsync();
 
-			var lookupTableDtoList = new List<ClientUnitPriceProductSubCategoryLookupTableDto>();
-			foreach(var productSubCategory in productSubCategoryList){
-				lookupTableDtoList.Add(new ClientUnitPriceProductSubCategoryLookupTableDto
+			var lookupTableDtoList = new List<ClientUnitPriceProductCategoryLookupTableDto>();
+			foreach(var productCategory in productCategoryList){
+				lookupTableDtoList.Add(new ClientUnitPriceProductCategoryLookupTableDto
 				{
-					Id = productSubCategory.Id,
-					DisplayName = productSubCategory.PipeDiameter?.ToString()
+					Id = productCategory.Id,
+					DisplayName = productCategory.Material?.ToString()
 				});
 			}
 
-            return new PagedResultDto<ClientUnitPriceProductSubCategoryLookupTableDto>(
+            return new PagedResultDto<ClientUnitPriceProductCategoryLookupTableDto>(
                 totalCount,
                 lookupTableDtoList
             );

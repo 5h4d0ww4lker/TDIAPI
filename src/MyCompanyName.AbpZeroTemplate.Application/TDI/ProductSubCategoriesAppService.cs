@@ -40,7 +40,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 			
 			var filteredProductSubCategories = _productSubCategoryRepository.GetAll()
 						.Include( e => e.ProductCategoryFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.PipeDiameter.Contains(input.Filter) || e.WallS.Contains(input.Filter) || e.SDR.Contains(input.Filter) || e.PN.Contains(input.Filter) || e.WPM.Contains(input.Filter) || e.OutputKGH.Contains(input.Filter) || e.HauiOffSpeed.Contains(input.Filter) || e.OutputTA.Contains(input.Filter) || e.ProductionTimeKMA.Contains(input.Filter) || e.ProductionPipeLengthKMA.Contains(input.Filter) || e.PipeLengthM.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.PipeDiameter.Contains(input.Filter) || e.WallS.Contains(input.Filter) || e.SDR.Contains(input.Filter) || e.PN.Contains(input.Filter) || e.WPM.Contains(input.Filter) || e.OutputKGH.Contains(input.Filter) || e.HauiOffSpeed.Contains(input.Filter) || e.OutputTA.Contains(input.Filter) || e.ProductionTimeKMA.Contains(input.Filter) || e.ProductionPipeLengthKMA.Contains(input.Filter) || e.PipeLengthM.Contains(input.Filter) || e.Extruder.Contains(input.Filter) || e.PipeHead.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeDiameterFilter),  e => e.PipeDiameter.ToLower() == input.PipeDiameterFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.WallSFilter),  e => e.WallS.ToLower() == input.WallSFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.SDRFilter),  e => e.SDR.ToLower() == input.SDRFilter.ToLower().Trim())
@@ -52,6 +52,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductionTimeKMAFilter),  e => e.ProductionTimeKMA.ToLower() == input.ProductionTimeKMAFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductionPipeLengthKMAFilter),  e => e.ProductionPipeLengthKMA.ToLower() == input.ProductionPipeLengthKMAFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeLengthMFilter),  e => e.PipeLengthM.ToLower() == input.PipeLengthMFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ExtruderFilter),  e => e.Extruder.ToLower() == input.ExtruderFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeHeadFilter),  e => e.PipeHead.ToLower() == input.PipeHeadFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim());
 
 			var pagedAndFilteredProductSubCategories = filteredProductSubCategories
@@ -76,6 +78,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                                 ProductionTimeKMA = o.ProductionTimeKMA,
                                 ProductionPipeLengthKMA = o.ProductionPipeLengthKMA,
                                 PipeLengthM = o.PipeLengthM,
+                                Extruder = o.Extruder,
+                                PipeHead = o.PipeHead,
                                 Id = o.Id
 							},
                          	ProductCategoryMaterial = s1 == null ? "" : s1.Material.ToString()
@@ -158,7 +162,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 			
 			var filteredProductSubCategories = _productSubCategoryRepository.GetAll()
 						.Include( e => e.ProductCategoryFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.PipeDiameter.Contains(input.Filter) || e.WallS.Contains(input.Filter) || e.SDR.Contains(input.Filter) || e.PN.Contains(input.Filter) || e.WPM.Contains(input.Filter) || e.OutputKGH.Contains(input.Filter) || e.HauiOffSpeed.Contains(input.Filter) || e.OutputTA.Contains(input.Filter) || e.ProductionTimeKMA.Contains(input.Filter) || e.ProductionPipeLengthKMA.Contains(input.Filter) || e.PipeLengthM.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.PipeDiameter.Contains(input.Filter) || e.WallS.Contains(input.Filter) || e.SDR.Contains(input.Filter) || e.PN.Contains(input.Filter) || e.WPM.Contains(input.Filter) || e.OutputKGH.Contains(input.Filter) || e.HauiOffSpeed.Contains(input.Filter) || e.OutputTA.Contains(input.Filter) || e.ProductionTimeKMA.Contains(input.Filter) || e.ProductionPipeLengthKMA.Contains(input.Filter) || e.PipeLengthM.Contains(input.Filter) || e.Extruder.Contains(input.Filter) || e.PipeHead.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeDiameterFilter),  e => e.PipeDiameter.ToLower() == input.PipeDiameterFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.WallSFilter),  e => e.WallS.ToLower() == input.WallSFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.SDRFilter),  e => e.SDR.ToLower() == input.SDRFilter.ToLower().Trim())
@@ -170,6 +174,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductionTimeKMAFilter),  e => e.ProductionTimeKMA.ToLower() == input.ProductionTimeKMAFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductionPipeLengthKMAFilter),  e => e.ProductionPipeLengthKMA.ToLower() == input.ProductionPipeLengthKMAFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeLengthMFilter),  e => e.PipeLengthM.ToLower() == input.PipeLengthMFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ExtruderFilter),  e => e.Extruder.ToLower() == input.ExtruderFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.PipeHeadFilter),  e => e.PipeHead.ToLower() == input.PipeHeadFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim());
 
 			var query = (from o in filteredProductSubCategories
@@ -190,6 +196,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                                 ProductionTimeKMA = o.ProductionTimeKMA,
                                 ProductionPipeLengthKMA = o.ProductionPipeLengthKMA,
                                 PipeLengthM = o.PipeLengthM,
+                                Extruder = o.Extruder,
+                                PipeHead = o.PipeHead,
                                 Id = o.Id
 							},
                          	ProductCategoryMaterial = s1 == null ? "" : s1.Material.ToString()

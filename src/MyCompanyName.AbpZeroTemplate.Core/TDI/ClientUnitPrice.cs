@@ -17,10 +17,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		public virtual string Description { get; set; }
 		
 		[Required]
-		[StringLength(ClientUnitPriceConsts.MaxUnitLength, MinimumLength = ClientUnitPriceConsts.MinUnitLength)]
-		public virtual string Unit { get; set; }
-		
-		[Required]
 		[StringLength(ClientUnitPriceConsts.MaxPriceLength, MinimumLength = ClientUnitPriceConsts.MinPriceLength)]
 		public virtual string Price { get; set; }
 		
@@ -30,10 +26,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
         [ForeignKey("ClientId")]
 		public Client ClientFk { get; set; }
 		
-		public virtual int ProductSubCategoryId { get; set; }
+		public virtual int ProductCategoryId { get; set; }
 		
-        [ForeignKey("ProductSubCategoryId")]
-		public ProductSubCategory ProductSubCategoryFk { get; set; }
+        [ForeignKey("ProductCategoryId")]
+		public ProductCategory ProductCategoryFk { get; set; }
 		
     }
 }

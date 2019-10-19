@@ -6,7 +6,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string ClientClientName { get; set;}
 
-		public string ProductSubCategoryPipeDiameter { get; set;}
+		public string ProductCategoryMaterial { get; set;}
 
 
     }

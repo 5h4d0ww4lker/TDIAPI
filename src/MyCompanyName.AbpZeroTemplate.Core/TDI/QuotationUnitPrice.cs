@@ -16,10 +16,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		public virtual string Description { get; set; }
 		
 		[Required]
-		[StringLength(QuotationUnitPriceConsts.MaxUnitLength, MinimumLength = QuotationUnitPriceConsts.MinUnitLength)]
-		public virtual string Unit { get; set; }
-		
-		[Required]
 		[StringLength(QuotationUnitPriceConsts.MaxPriceLength, MinimumLength = QuotationUnitPriceConsts.MinPriceLength)]
 		public virtual string Price { get; set; }
 		

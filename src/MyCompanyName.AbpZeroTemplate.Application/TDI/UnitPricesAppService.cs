@@ -24,14 +24,14 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
     {
 		 private readonly IRepository<UnitPrice> _unitPriceRepository;
 		 private readonly IUnitPricesExcelExporter _unitPricesExcelExporter;
-		 private readonly IRepository<Product,int> _lookup_productRepository;
+		 private readonly IRepository<ProductCategory,int> _lookup_productCategoryRepository;
 		 
 
-		  public UnitPricesAppService(IRepository<UnitPrice> unitPriceRepository, IUnitPricesExcelExporter unitPricesExcelExporter , IRepository<Product, int> lookup_productRepository) 
+		  public UnitPricesAppService(IRepository<UnitPrice> unitPriceRepository, IUnitPricesExcelExporter unitPricesExcelExporter , IRepository<ProductCategory, int> lookup_productCategoryRepository) 
 		  {
 			_unitPriceRepository = unitPriceRepository;
 			_unitPricesExcelExporter = unitPricesExcelExporter;
-			_lookup_productRepository = lookup_productRepository;
+			_lookup_productCategoryRepository = lookup_productCategoryRepository;
 		
 		  }
 
@@ -39,28 +39,26 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
          {
 			
 			var filteredUnitPrices = _unitPriceRepository.GetAll()
-						.Include( e => e.ProductFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Price.Contains(input.Filter) || e.Unit.Contains(input.Filter))
+						.Include( e => e.ProductCategoryFk)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Price.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PriceFilter),  e => e.Price.ToLower() == input.PriceFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitFilter),  e => e.Unit.ToLower() == input.UnitFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductDescriptionFilter), e => e.ProductFk != null && e.ProductFk.Description.ToLower() == input.ProductDescriptionFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim());
 
 			var pagedAndFilteredUnitPrices = filteredUnitPrices
                 .OrderBy(input.Sorting ?? "id asc")
                 .PageBy(input);
 
 			var unitPrices = from o in pagedAndFilteredUnitPrices
-                         join o1 in _lookup_productRepository.GetAll() on o.ProductId equals o1.Id into j1
+                         join o1 in _lookup_productCategoryRepository.GetAll() on o.ProductCategoryId equals o1.Id into j1
                          from s1 in j1.DefaultIfEmpty()
                          
                          select new GetUnitPriceForViewDto() {
 							UnitPrice = new UnitPriceDto
 							{
                                 Price = o.Price,
-                                Unit = o.Unit,
                                 Id = o.Id
 							},
-                         	ProductDescription = s1 == null ? "" : s1.Description.ToString()
+                         	ProductCategoryMaterial = s1 == null ? "" : s1.Material.ToString()
 						};
 
             var totalCount = await filteredUnitPrices.CountAsync();
@@ -77,10 +75,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 
             var output = new GetUnitPriceForViewDto { UnitPrice = ObjectMapper.Map<UnitPriceDto>(unitPrice) };
 
-		    if (output.UnitPrice.ProductId != null)
+		    if (output.UnitPrice.ProductCategoryId != null)
             {
-                var _lookupProduct = await _lookup_productRepository.FirstOrDefaultAsync((int)output.UnitPrice.ProductId);
-                output.ProductDescription = _lookupProduct.Description.ToString();
+                var _lookupProductCategory = await _lookup_productCategoryRepository.FirstOrDefaultAsync((int)output.UnitPrice.ProductCategoryId);
+                output.ProductCategoryMaterial = _lookupProductCategory.Material.ToString();
             }
 			
             return output;
@@ -93,10 +91,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
            
 		    var output = new GetUnitPriceForEditOutput {UnitPrice = ObjectMapper.Map<CreateOrEditUnitPriceDto>(unitPrice)};
 
-		    if (output.UnitPrice.ProductId != null)
+		    if (output.UnitPrice.ProductCategoryId != null)
             {
-                var _lookupProduct = await _lookup_productRepository.FirstOrDefaultAsync((int)output.UnitPrice.ProductId);
-                output.ProductDescription = _lookupProduct.Description.ToString();
+                var _lookupProductCategory = await _lookup_productCategoryRepository.FirstOrDefaultAsync((int)output.UnitPrice.ProductCategoryId);
+                output.ProductCategoryMaterial = _lookupProductCategory.Material.ToString();
             }
 			
             return output;
@@ -139,24 +137,22 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
          {
 			
 			var filteredUnitPrices = _unitPriceRepository.GetAll()
-						.Include( e => e.ProductFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Price.Contains(input.Filter) || e.Unit.Contains(input.Filter))
+						.Include( e => e.ProductCategoryFk)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Price.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PriceFilter),  e => e.Price.ToLower() == input.PriceFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitFilter),  e => e.Unit.ToLower() == input.UnitFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductDescriptionFilter), e => e.ProductFk != null && e.ProductFk.Description.ToLower() == input.ProductDescriptionFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim());
 
 			var query = (from o in filteredUnitPrices
-                         join o1 in _lookup_productRepository.GetAll() on o.ProductId equals o1.Id into j1
+                         join o1 in _lookup_productCategoryRepository.GetAll() on o.ProductCategoryId equals o1.Id into j1
                          from s1 in j1.DefaultIfEmpty()
                          
                          select new GetUnitPriceForViewDto() { 
 							UnitPrice = new UnitPriceDto
 							{
                                 Price = o.Price,
-                                Unit = o.Unit,
                                 Id = o.Id
 							},
-                         	ProductDescription = s1 == null ? "" : s1.Description.ToString()
+                         	ProductCategoryMaterial = s1 == null ? "" : s1.Material.ToString()
 						 });
 
 
@@ -168,29 +164,29 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 
 
 		[AbpAuthorize(AppPermissions.Pages_UnitPrices)]
-         public async Task<PagedResultDto<UnitPriceProductLookupTableDto>> GetAllProductForLookupTable(GetAllForLookupTableInput input)
+         public async Task<PagedResultDto<UnitPriceProductCategoryLookupTableDto>> GetAllProductCategoryForLookupTable(GetAllForLookupTableInput input)
          {
-             var query = _lookup_productRepository.GetAll().WhereIf(
+             var query = _lookup_productCategoryRepository.GetAll().WhereIf(
                     !string.IsNullOrWhiteSpace(input.Filter),
-                   e=> e.Description.ToString().Contains(input.Filter)
+                   e=> e.Material.ToString().Contains(input.Filter)
                 );
 
             var totalCount = await query.CountAsync();
 
-            var productList = await query
+            var productCategoryList = await query
                 .PageBy(input)
                 .ToListAsync();
 
-			var lookupTableDtoList = new List<UnitPriceProductLookupTableDto>();
-			foreach(var product in productList){
-				lookupTableDtoList.Add(new UnitPriceProductLookupTableDto
+			var lookupTableDtoList = new List<UnitPriceProductCategoryLookupTableDto>();
+			foreach(var productCategory in productCategoryList){
+				lookupTableDtoList.Add(new UnitPriceProductCategoryLookupTableDto
 				{
-					Id = product.Id,
-					DisplayName = product.Description?.ToString()
+					Id = productCategory.Id,
+					DisplayName = productCategory.Material?.ToString()
 				});
 			}
 
-            return new PagedResultDto<UnitPriceProductLookupTableDto>(
+            return new PagedResultDto<UnitPriceProductCategoryLookupTableDto>(
                 totalCount,
                 lookupTableDtoList
             );

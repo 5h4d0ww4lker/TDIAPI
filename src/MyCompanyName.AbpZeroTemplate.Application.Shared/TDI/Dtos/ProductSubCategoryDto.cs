@@ -28,6 +28,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string PipeLengthM { get; set; }
 
+		public string Extruder { get; set; }
+
+		public string PipeHead { get; set; }
+
 
 		 public int ProductCategoryId { get; set; }
 

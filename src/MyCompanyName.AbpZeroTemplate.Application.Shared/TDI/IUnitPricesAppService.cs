@@ -22,7 +22,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		Task<FileDto> GetUnitPricesToExcel(GetAllUnitPricesForExcelInput input);
 
 		
-		Task<PagedResultDto<UnitPriceProductLookupTableDto>> GetAllProductForLookupTable(GetAllForLookupTableInput input);
+		Task<PagedResultDto<UnitPriceProductCategoryLookupTableDto>> GetAllProductCategoryForLookupTable(GetAllForLookupTableInput input);
 		
     }
 }

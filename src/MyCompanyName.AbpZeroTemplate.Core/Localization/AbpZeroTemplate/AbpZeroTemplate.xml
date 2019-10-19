@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>
+  <texts>    <text name="UOM">U o m</text>
+
     <text name="OrderedProduct">Ordered product</text>
     <text name="OrderedProductsHeaderInfo">Ordered products header info</text>
     <text name="CreateNewOrderedProduct">Create new ordered product</text>

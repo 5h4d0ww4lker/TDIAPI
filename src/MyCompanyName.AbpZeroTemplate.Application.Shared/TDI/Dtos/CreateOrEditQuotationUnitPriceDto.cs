@@ -14,11 +14,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		
 		
 		[Required]
-		[StringLength(QuotationUnitPriceConsts.MaxUnitLength, MinimumLength = QuotationUnitPriceConsts.MinUnitLength)]
-		public string Unit { get; set; }
-		
-		
-		[Required]
 		[StringLength(QuotationUnitPriceConsts.MaxPriceLength, MinimumLength = QuotationUnitPriceConsts.MinPriceLength)]
 		public string Price { get; set; }
 		

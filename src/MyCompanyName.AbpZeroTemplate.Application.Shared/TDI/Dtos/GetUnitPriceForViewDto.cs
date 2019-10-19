@@ -4,7 +4,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 		public UnitPriceDto UnitPrice { get; set; }
 
-		public string ProductDescription { get; set;}
+		public string ProductCategoryMaterial { get; set;}
 
 
     }

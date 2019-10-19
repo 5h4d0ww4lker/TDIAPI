@@ -15,15 +15,11 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 
 		public virtual string Price { get; set; }
 		
-		[Required]
-		[StringLength(UnitPriceConsts.MaxUnitLength, MinimumLength = UnitPriceConsts.MinUnitLength)]
-		public virtual string Unit { get; set; }
-		
 
-		public virtual int? ProductId { get; set; }
+		public virtual int ProductCategoryId { get; set; }
 		
-        [ForeignKey("ProductId")]
-		public Product ProductFk { get; set; }
+        [ForeignKey("ProductCategoryId")]
+		public ProductCategory ProductCategoryFk { get; set; }
 		
     }
 }

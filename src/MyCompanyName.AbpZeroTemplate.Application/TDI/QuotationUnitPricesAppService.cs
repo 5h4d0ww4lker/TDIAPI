@@ -40,9 +40,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 			
 			var filteredQuotationUnitPrices = _quotationUnitPriceRepository.GetAll()
 						.Include( e => e.QuotationFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Unit.Contains(input.Filter) || e.Price.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Price.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitFilter),  e => e.Unit.ToLower() == input.UnitFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PriceFilter),  e => e.Price.ToLower() == input.PriceFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationQuotationNumberFilter), e => e.QuotationFk != null && e.QuotationFk.QuotationNumber.ToLower() == input.QuotationQuotationNumberFilter.ToLower().Trim());
 
@@ -58,7 +57,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 							QuotationUnitPrice = new QuotationUnitPriceDto
 							{
                                 Description = o.Description,
-                                Unit = o.Unit,
                                 Price = o.Price,
                                 Id = o.Id
 							},
@@ -142,9 +140,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 			
 			var filteredQuotationUnitPrices = _quotationUnitPriceRepository.GetAll()
 						.Include( e => e.QuotationFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Unit.Contains(input.Filter) || e.Price.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Description.Contains(input.Filter) || e.Price.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitFilter),  e => e.Unit.ToLower() == input.UnitFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PriceFilter),  e => e.Price.ToLower() == input.PriceFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationQuotationNumberFilter), e => e.QuotationFk != null && e.QuotationFk.QuotationNumber.ToLower() == input.QuotationQuotationNumberFilter.ToLower().Trim());
 
@@ -156,7 +153,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 							QuotationUnitPrice = new QuotationUnitPriceDto
 							{
                                 Description = o.Description,
-                                Unit = o.Unit,
                                 Price = o.Price,
                                 Id = o.Id
 							},

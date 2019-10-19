@@ -35,7 +35,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
 
                     AddHeader(
                         sheet,
-                        L("UnitOfMeasurement"),
                         L("Quantity"),
                         L("TotalAmountInETB"),
                         L("Description"),
@@ -49,7 +48,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
 
                     AddObjects(
                         sheet, 2, quotationItems,
-                        _ => _.QuotationItem.UnitOfMeasurement,
                         _ => _.QuotationItem.Quantity,
                         _ => _.QuotationItem.TotalAmountInETB,
                         _ => _.QuotationItem.Description,

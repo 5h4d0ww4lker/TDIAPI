@@ -8,9 +8,9 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 		public string Material { get; set; }
 
-		public string Extruder { get; set; }
+		public string UOM { get; set; }
 
-		public string Pipehead { get; set; }
+		public string Description { get; set; }
 
 
 

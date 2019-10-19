@@ -1,5 +1,5 @@
 {
-  "IsRegenerate": false,
+  "IsRegenerate": true,
   "MenuPosition": "main",
   "RelativeNamespace": "TDI",
   "EntityName": "ProductCategory",
@@ -38,7 +38,7 @@
       }
     },
     {
-      "Name": "Extruder",
+      "Name": "UOM",
       "Type": "string",
       "MaxLength": 100,
       "MinLength": 1,
@@ -57,7 +57,7 @@
       }
     },
     {
-      "Name": "Pipehead",
+      "Name": "Description",
       "Type": "string",
       "MaxLength": 100,
       "MinLength": 1,

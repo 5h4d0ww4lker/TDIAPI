@@ -9,14 +9,12 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string DescriptionFilter { get; set; }
 
-		public string UnitFilter { get; set; }
-
 		public string PriceFilter { get; set; }
 
 
 		 public string ClientClientNameFilter { get; set; }
 
-		 		 public string ProductSubCategoryPipeDiameterFilter { get; set; }
+		 		 public string ProductCategoryMaterialFilter { get; set; }
 
 		 
     }

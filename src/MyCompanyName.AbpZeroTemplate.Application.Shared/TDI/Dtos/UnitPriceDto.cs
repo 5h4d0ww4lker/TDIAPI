@@ -8,10 +8,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 		public string Price { get; set; }
 
-		public string Unit { get; set; }
 
-
-		 public int? ProductId { get; set; }
+		 public int ProductCategoryId { get; set; }
 
 		 
     }

@@ -14,18 +14,13 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		
 		
 		[Required]
-		[StringLength(ClientUnitPriceConsts.MaxUnitLength, MinimumLength = ClientUnitPriceConsts.MinUnitLength)]
-		public string Unit { get; set; }
-		
-		
-		[Required]
 		[StringLength(ClientUnitPriceConsts.MaxPriceLength, MinimumLength = ClientUnitPriceConsts.MinPriceLength)]
 		public string Price { get; set; }
 		
 		
 		 public int ClientId { get; set; }
 		 
-		 		 public int ProductSubCategoryId { get; set; }
+		 		 public int ProductCategoryId { get; set; }
 		 
 		 
     }

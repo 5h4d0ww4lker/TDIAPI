@@ -7,8 +7,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 		public string Filter { get; set; }
 
-		public string UnitOfMeasurementFilter { get; set; }
-
 		public string QuantityFilter { get; set; }
 
 		public string TotalAmountInETBFilter { get; set; }

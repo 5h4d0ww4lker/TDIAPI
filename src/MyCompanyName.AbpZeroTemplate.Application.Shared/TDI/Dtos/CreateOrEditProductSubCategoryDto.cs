@@ -62,6 +62,16 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		public string PipeLengthM { get; set; }
 		
 		
+		[Required]
+		[StringLength(ProductSubCategoryConsts.MaxExtruderLength, MinimumLength = ProductSubCategoryConsts.MinExtruderLength)]
+		public string Extruder { get; set; }
+		
+		
+		[Required]
+		[StringLength(ProductSubCategoryConsts.MaxPipeHeadLength, MinimumLength = ProductSubCategoryConsts.MinPipeHeadLength)]
+		public string PipeHead { get; set; }
+		
+		
 		 public int ProductCategoryId { get; set; }
 		 
 		 

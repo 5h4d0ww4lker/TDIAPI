@@ -38,25 +38,6 @@
       }
     },
     {
-      "Name": "Unit",
-      "Type": "string",
-      "MaxLength": 100,
-      "MinLength": 1,
-      "Range": {
-        "IsRangeSet": false,
-        "MinimumValue": 0,
-        "MaximumValue": 0
-      },
-      "Required": true,
-      "Nullable": false,
-      "Regex": "",
-      "UserInterface": {
-        "AdvancedFilter": true,
-        "List": true,
-        "CreateOrUpdate": true
-      }
-    },
-    {
       "Name": "Price",
       "Type": "string",
       "MaxLength": 100,
@@ -89,11 +70,11 @@
     },
     {
       "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
-      "ForeignEntityName": "ProductSubCategory",
+      "ForeignEntityName": "ProductCategory",
       "IdType": "int",
       "IsNullable": false,
-      "PropertyName": "ProductSubCategoryId",
-      "DisplayPropertyName": "PipeDiameter",
+      "PropertyName": "ProductCategoryId",
+      "DisplayPropertyName": "Material",
       "DuplicationNumber": 0,
       "RelationType": "single"
     }

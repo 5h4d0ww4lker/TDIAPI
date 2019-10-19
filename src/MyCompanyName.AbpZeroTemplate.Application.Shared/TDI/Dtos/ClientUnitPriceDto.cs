@@ -8,14 +8,12 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 		public string Description { get; set; }
 
-		public string Unit { get; set; }
-
 		public string Price { get; set; }
 
 
 		 public int ClientId { get; set; }
 
-		 		 public int ProductSubCategoryId { get; set; }
+		 		 public int ProductCategoryId { get; set; }
 
 		 
     }

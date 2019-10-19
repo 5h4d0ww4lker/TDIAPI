@@ -60,8 +60,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.Include( e => e.UnitPriceFk)
 						.Include( e => e.ClientUnitPriceFk)
 						.Include( e => e.QuotationUnitPriceFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.UnitOfMeasurement.Contains(input.Filter) || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter))
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitOfMeasurementFilter),  e => e.UnitOfMeasurement.ToLower() == input.UnitOfMeasurementFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuantityFilter),  e => e.Quantity.ToLower() == input.QuantityFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TotalAmountInETBFilter),  e => e.TotalAmountInETB.ToLower() == input.TotalAmountInETBFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
@@ -98,7 +97,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                          select new GetQuotationItemForViewDto() {
 							QuotationItem = new QuotationItemDto
 							{
-                                UnitOfMeasurement = o.UnitOfMeasurement,
                                 Quantity = o.Quantity,
                                 TotalAmountInETB = o.TotalAmountInETB,
                                 Description = o.Description,
@@ -254,8 +252,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.Include( e => e.UnitPriceFk)
 						.Include( e => e.ClientUnitPriceFk)
 						.Include( e => e.QuotationUnitPriceFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.UnitOfMeasurement.Contains(input.Filter) || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter))
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitOfMeasurementFilter),  e => e.UnitOfMeasurement.ToLower() == input.UnitOfMeasurementFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuantityFilter),  e => e.Quantity.ToLower() == input.QuantityFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TotalAmountInETBFilter),  e => e.TotalAmountInETB.ToLower() == input.TotalAmountInETBFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
@@ -288,7 +285,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                          select new GetQuotationItemForViewDto() { 
 							QuotationItem = new QuotationItemDto
 							{
-                                UnitOfMeasurement = o.UnitOfMeasurement,
                                 Quantity = o.Quantity,
                                 TotalAmountInETB = o.TotalAmountInETB,
                                 Description = o.Description,

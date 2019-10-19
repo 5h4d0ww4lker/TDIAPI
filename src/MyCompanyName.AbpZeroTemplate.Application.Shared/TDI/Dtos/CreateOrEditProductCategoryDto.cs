@@ -14,13 +14,13 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		
 		
 		[Required]
-		[StringLength(ProductCategoryConsts.MaxExtruderLength, MinimumLength = ProductCategoryConsts.MinExtruderLength)]
-		public string Extruder { get; set; }
+		[StringLength(ProductCategoryConsts.MaxUOMLength, MinimumLength = ProductCategoryConsts.MinUOMLength)]
+		public string UOM { get; set; }
 		
 		
 		[Required]
-		[StringLength(ProductCategoryConsts.MaxPipeheadLength, MinimumLength = ProductCategoryConsts.MinPipeheadLength)]
-		public string Pipehead { get; set; }
+		[StringLength(ProductCategoryConsts.MaxDescriptionLength, MinimumLength = ProductCategoryConsts.MinDescriptionLength)]
+		public string Description { get; set; }
 		
 		
 

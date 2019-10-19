@@ -36,5 +36,11 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		public const int MinPipeLengthMLength = 1;
 		public const int MaxPipeLengthMLength = 100;
 						
+		public const int MinExtruderLength = 1;
+		public const int MaxExtruderLength = 100;
+						
+		public const int MinPipeHeadLength = 1;
+		public const int MaxPipeHeadLength = 100;
+						
     }
 }

@@ -8,8 +8,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 		public string Description { get; set; }
 
-		public string Unit { get; set; }
-
 		public string Price { get; set; }
 
 

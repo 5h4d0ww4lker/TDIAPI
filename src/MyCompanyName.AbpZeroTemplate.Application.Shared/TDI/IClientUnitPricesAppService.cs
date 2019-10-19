@@ -24,7 +24,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		
 		Task<PagedResultDto<ClientUnitPriceClientLookupTableDto>> GetAllClientForLookupTable(GetAllForLookupTableInput input);
 		
-		Task<PagedResultDto<ClientUnitPriceProductSubCategoryLookupTableDto>> GetAllProductSubCategoryForLookupTable(GetAllForLookupTableInput input);
+		Task<PagedResultDto<ClientUnitPriceProductCategoryLookupTableDto>> GetAllProductCategoryForLookupTable(GetAllForLookupTableInput input);
 		
     }
 }

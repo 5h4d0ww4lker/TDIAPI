@@ -43,32 +43,48 @@ namespace MyCompanyName.AbpZeroTemplate
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
-           configuration.CreateMap<CreateOrEditOrderedProductDto, OrderedProduct>();
-           configuration.CreateMap<OrderedProduct, OrderedProductDto>();
-           configuration.CreateMap<CreateOrEditQuotationItemDto, QuotationItem>();
-           configuration.CreateMap<QuotationItem, QuotationItemDto>();
-           configuration.CreateMap<CreateOrEditQuotationUnitPriceDto, QuotationUnitPrice>();
-           configuration.CreateMap<QuotationUnitPrice, QuotationUnitPriceDto>();
-           configuration.CreateMap<CreateOrEditClientUnitPriceDto, ClientUnitPrice>();
-           configuration.CreateMap<ClientUnitPrice, ClientUnitPriceDto>();
-           configuration.CreateMap<CreateOrEditProductSubCategoryDto, ProductSubCategory>();
-           configuration.CreateMap<ProductSubCategory, ProductSubCategoryDto>();
-           configuration.CreateMap<CreateOrEditProductCategoryDto, ProductCategory>();
-           configuration.CreateMap<ProductCategory, ProductCategoryDto>();
-           configuration.CreateMap<CreateOrEditProdactCategoryDto, ProdactCategory>();
+            configuration.CreateMap<CreateOrEditOrderedProductDto, OrderedProduct>();
+            configuration.CreateMap<OrderedProduct, CreateOrEditOrderedProductDto>();
+            configuration.CreateMap<OrderedProduct, OrderedProductDto>();
+
+            configuration.CreateMap<CreateOrEditQuotationItemDto, QuotationItem>();
+            configuration.CreateMap<QuotationItem, CreateOrEditQuotationItemDto>();
+            configuration.CreateMap<QuotationItem, QuotationItemDto>();
+
+            configuration.CreateMap<CreateOrEditQuotationUnitPriceDto, QuotationUnitPrice>();
+            configuration.CreateMap<QuotationUnitPrice, CreateOrEditQuotationUnitPriceDto>();
+            configuration.CreateMap<QuotationUnitPrice, QuotationUnitPriceDto>();
+
+            configuration.CreateMap<CreateOrEditClientUnitPriceDto, ClientUnitPrice>();
+            configuration.CreateMap<ClientUnitPrice, CreateOrEditClientUnitPriceDto>();
+            configuration.CreateMap<ClientUnitPrice, ClientUnitPriceDto>();
+
+            configuration.CreateMap<CreateOrEditProductSubCategoryDto, ProductSubCategory>();
+            configuration.CreateMap<ProductSubCategory, CreateOrEditProductSubCategoryDto>();
+            configuration.CreateMap<ProductSubCategory, ProductSubCategoryDto>();
+
+            configuration.CreateMap<CreateOrEditProductCategoryDto, ProductCategory>();
+            configuration.CreateMap<ProductCategory, CreateOrEditProductCategoryDto>();
+            configuration.CreateMap<ProductCategory, ProductCategoryDto>();
+
+            configuration.CreateMap<CreateOrEditProdactCategoryDto, ProdactCategory>();
            configuration.CreateMap<ProdactCategory, ProdactCategoryDto>();
-            configuration.CreateMap<UnitPrice, CreateOrEditUnitPriceDto>();
+
             configuration.CreateMap<CreateOrEditUnitPriceDto, UnitPrice>();
-           configuration.CreateMap<UnitPrice, UnitPriceDto>();
+            configuration.CreateMap<UnitPrice, CreateOrEditUnitPriceDto>();
+            configuration.CreateMap<UnitPrice, UnitPriceDto>();
             configuration.CreateMap<Product, CreateOrEditProductDto>();
             configuration.CreateMap<CreateOrEditProductDto, Product>();
            configuration.CreateMap<Product, ProductDto>();
-            configuration.CreateMap<Quotation, CreateOrEditQuotationDto>();
+
             configuration.CreateMap<CreateOrEditQuotationDto, Quotation>();
-           configuration.CreateMap<Quotation, QuotationDto>();
+            configuration.CreateMap<Quotation, CreateOrEditQuotationDto>();
+            configuration.CreateMap<Quotation, QuotationDto>();
+
             configuration.CreateMap<CreateOrEditClientDto, Client>();
             configuration.CreateMap<Client, CreateOrEditClientDto>();
            configuration.CreateMap<Client, ClientDto>();
+
             configuration.CreateMap<CreateOrEditContactPersonDto, ContactPerson>();
             configuration.CreateMap<ContactPerson, CreateOrEditContactPersonDto>();
            configuration.CreateMap<ContactPerson, ContactPersonDto>();

@@ -9,11 +9,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
     {
 
 		[Required]
-		[StringLength(QuotationItemConsts.MaxUnitOfMeasurementLength, MinimumLength = QuotationItemConsts.MinUnitOfMeasurementLength)]
-		public string UnitOfMeasurement { get; set; }
-		
-		
-		[Required]
 		[StringLength(QuotationItemConsts.MaxQuantityLength, MinimumLength = QuotationItemConsts.MinQuantityLength)]
 		public string Quantity { get; set; }
 		

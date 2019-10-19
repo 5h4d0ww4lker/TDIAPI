@@ -17,12 +17,12 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		public virtual string Material { get; set; }
 		
 		[Required]
-		[StringLength(ProductCategoryConsts.MaxExtruderLength, MinimumLength = ProductCategoryConsts.MinExtruderLength)]
-		public virtual string Extruder { get; set; }
+		[StringLength(ProductCategoryConsts.MaxUOMLength, MinimumLength = ProductCategoryConsts.MinUOMLength)]
+		public virtual string UOM { get; set; }
 		
 		[Required]
-		[StringLength(ProductCategoryConsts.MaxPipeheadLength, MinimumLength = ProductCategoryConsts.MinPipeheadLength)]
-		public virtual string Pipehead { get; set; }
+		[StringLength(ProductCategoryConsts.MaxDescriptionLength, MinimumLength = ProductCategoryConsts.MinDescriptionLength)]
+		public virtual string Description { get; set; }
 		
 
     }

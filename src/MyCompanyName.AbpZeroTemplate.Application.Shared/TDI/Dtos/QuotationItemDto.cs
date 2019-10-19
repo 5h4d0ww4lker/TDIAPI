@@ -6,8 +6,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 {
     public class QuotationItemDto : EntityDto
     {
-		public string UnitOfMeasurement { get; set; }
-
 		public string Quantity { get; set; }
 
 		public string TotalAmountInETB { get; set; }

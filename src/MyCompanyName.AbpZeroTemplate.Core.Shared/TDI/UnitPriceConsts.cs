@@ -4,8 +4,5 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
     {
 
 						
-		public const int MinUnitLength = 1;
-		public const int MaxUnitLength = 100;
-						
     }
 }

@@ -29,6 +29,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string PipeLengthMFilter { get; set; }
 
+		public string ExtruderFilter { get; set; }
+
+		public string PipeHeadFilter { get; set; }
+
 
 		 public string ProductCategoryMaterialFilter { get; set; }
 

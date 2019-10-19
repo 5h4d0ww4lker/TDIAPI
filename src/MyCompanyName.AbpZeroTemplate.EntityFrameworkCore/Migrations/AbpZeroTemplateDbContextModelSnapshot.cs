@@ -1389,17 +1389,13 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int>("ProductSubCategoryId");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<int>("ProductCategoryId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("ProductSubCategoryId");
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("ClientUnitPrices");
                 });
@@ -1548,7 +1544,7 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<DateTime?>("DeletionTime");
 
-                    b.Property<string>("Extruder")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100);
 
@@ -1562,7 +1558,7 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("Pipehead")
+                    b.Property<string>("UOM")
                         .IsRequired()
                         .HasMaxLength(100);
 
@@ -1584,6 +1580,10 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.Property<long?>("DeleterUserId");
 
                     b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<string>("Extruder")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<string>("HauiOffSpeed")
                         .IsRequired()
@@ -1607,6 +1607,10 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("PipeDiameter")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("PipeHead")
                         .IsRequired()
                         .HasMaxLength(100);
 
@@ -1733,10 +1737,6 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("UnitOfMeasurement")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
                     b.Property<int?>("UnitPriceId");
 
                     b.HasKey("Id");
@@ -1786,10 +1786,6 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<int?>("QuotationId");
 
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
                     b.HasKey("Id");
 
                     b.HasIndex("QuotationId");
@@ -1819,15 +1815,11 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Price");
 
-                    b.Property<int?>("ProductId");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<int>("ProductCategoryId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("UnitPrices");
                 });
@@ -2050,9 +2042,9 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.ProductSubCategory", "ProductSubCategoryFk")
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.ProductCategory", "ProductCategoryFk")
                         .WithMany()
-                        .HasForeignKey("ProductSubCategoryId")
+                        .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -2115,9 +2107,10 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.TDI.UnitPrice", b =>
                 {
-                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.Product", "ProductFk")
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.ProductCategory", "ProductCategoryFk")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

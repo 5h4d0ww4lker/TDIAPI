@@ -3,9 +3,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
     public class QuotationItemConsts
     {
 
-		public const int MinUnitOfMeasurementLength = 1;
-		public const int MaxUnitOfMeasurementLength = 100;
-						
 		public const int MinQuantityLength = 1;
 		public const int MaxQuantityLength = 100;
 						

@@ -36,19 +36,17 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
                     AddHeader(
                         sheet,
                         L("Description"),
-                        L("Unit"),
                         L("Price"),
                         (L("Client")) + L("ClientName"),
-                        (L("ProductSubCategory")) + L("PipeDiameter")
+                        (L("ProductCategory")) + L("Material")
                         );
 
                     AddObjects(
                         sheet, 2, clientUnitPrices,
                         _ => _.ClientUnitPrice.Description,
-                        _ => _.ClientUnitPrice.Unit,
                         _ => _.ClientUnitPrice.Price,
                         _ => _.ClientClientName,
-                        _ => _.ProductSubCategoryPipeDiameter
+                        _ => _.ProductCategoryMaterial
                         );
 
 					
