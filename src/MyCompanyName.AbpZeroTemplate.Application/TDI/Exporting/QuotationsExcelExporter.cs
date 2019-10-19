@@ -36,23 +36,27 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
                     AddHeader(
                         sheet,
                         L("QuotationNumber"),
-                        L("PriceValidity"),
-                        L("TermOfPayment"),
                         L("ShipmentTypes"),
                         L("DiscountInPercent"),
                         L("DiscountInAmount"),
-                        (L("Client")) + L("ClientName")
+                        L("PlaceOfDelivery"),
+                        (L("Client")) + L("ClientName"),
+                        (L("ProductCategory")) + L("Material"),
+                        (L("PaymentTerm")) + L("Description"),
+                        (L("PriceValidity")) + L("Description")
                         );
 
                     AddObjects(
                         sheet, 2, quotations,
                         _ => _.Quotation.QuotationNumber,
-                        _ => _.Quotation.PriceValidity,
-                        _ => _.Quotation.TermOfPayment,
                         _ => _.Quotation.ShipmentTypes,
                         _ => _.Quotation.DiscountInPercent,
                         _ => _.Quotation.DiscountInAmount,
-                        _ => _.ClientClientName
+                        _ => _.Quotation.PlaceOfDelivery,
+                        _ => _.ClientClientName,
+                        _ => _.ProductCategoryMaterial,
+                        _ => _.PaymentTermDescription,
+                        _ => _.PriceValidityDescription
                         );
 
 					

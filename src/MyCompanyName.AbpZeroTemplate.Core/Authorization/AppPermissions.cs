@@ -6,6 +6,16 @@ namespace MyCompanyName.AbpZeroTemplate.Authorization
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_PaymentTerms = "Pages.PaymentTerms";
+        public const string Pages_PaymentTerms_Create = "Pages.PaymentTerms.Create";
+        public const string Pages_PaymentTerms_Edit = "Pages.PaymentTerms.Edit";
+        public const string Pages_PaymentTerms_Delete = "Pages.PaymentTerms.Delete";
+
+        public const string Pages_PriceValidities = "Pages.PriceValidities";
+        public const string Pages_PriceValidities_Create = "Pages.PriceValidities.Create";
+        public const string Pages_PriceValidities_Edit = "Pages.PriceValidities.Edit";
+        public const string Pages_PriceValidities_Delete = "Pages.PriceValidities.Delete";
+
         public const string Pages_OrderedProducts = "Pages.OrderedProducts";
         public const string Pages_OrderedProducts_Create = "Pages.OrderedProducts.Create";
         public const string Pages_OrderedProducts_Edit = "Pages.OrderedProducts.Edit";

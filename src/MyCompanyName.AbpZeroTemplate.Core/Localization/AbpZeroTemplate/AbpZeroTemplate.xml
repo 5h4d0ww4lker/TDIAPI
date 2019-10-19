@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="UOM">U o m</text>
+  <texts>    <text name="PaymentTermDescription">Payment term description</text>
+    <text name="PickPaymentTerm">Pick payment term</text>
+    <text name="PriceValidityDescription">Price validity description</text>
+    <text name="PickPriceValidity">Pick price validity</text>
+    <text name="PaymentTerm">Payment term</text>
+    <text name="PaymentTermsHeaderInfo">Payment terms header info</text>
+    <text name="CreateNewPaymentTerm">Create new payment term</text>
+    <text name="EditPaymentTerm">Edit payment term</text>
+    <text name="DeletePaymentTerm">Delete payment term</text>
+    <text name="PaymentTerms">Payment terms</text>
+    <text name="PriceValiditiesHeaderInfo">Price validities header info</text>
+    <text name="CreateNewPriceValidity">Create new price validity</text>
+    <text name="EditPriceValidity">Edit price validity</text>
+    <text name="DeletePriceValidity">Delete price validity</text>
+    <text name="PriceValidities">Price validities</text>
+    <text name="PlaceOfDelivery">Place of delivery</text>
+    <text name="UOM">U o m</text>
 
     <text name="OrderedProduct">Ordered product</text>
     <text name="OrderedProductsHeaderInfo">Ordered products header info</text>

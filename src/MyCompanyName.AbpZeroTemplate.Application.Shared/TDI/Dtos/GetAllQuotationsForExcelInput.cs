@@ -9,18 +9,22 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string QuotationNumberFilter { get; set; }
 
-		public string PriceValidityFilter { get; set; }
-
-		public string TermOfPaymentFilter { get; set; }
-
 		public string ShipmentTypesFilter { get; set; }
 
 		public string DiscountInPercentFilter { get; set; }
 
 		public string DiscountInAmountFilter { get; set; }
 
+		public string PlaceOfDeliveryFilter { get; set; }
+
 
 		 public string ClientClientNameFilter { get; set; }
+
+		 		 public string ProductCategoryMaterialFilter { get; set; }
+
+		 		 public string PaymentTermDescriptionFilter { get; set; }
+
+		 		 public string PriceValidityDescriptionFilter { get; set; }
 
 		 
     }

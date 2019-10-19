@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyCompanyName.AbpZeroTemplate.EntityFrameworkCore;
 
 namespace MyCompanyName.AbpZeroTemplate.Migrations
 {
     [DbContext(typeof(AbpZeroTemplateDbContext))]
-    partial class AbpZeroTemplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191019113642_Added_PaymentTerm")]
+    partial class Added_PaymentTerm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1731,11 +1733,11 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<long?>("LastModifierUserId");
 
-                    b.Property<int?>("PaymentTermId");
-
                     b.Property<string>("PlaceOfDelivery");
 
-                    b.Property<int?>("PriceValidityId");
+                    b.Property<string>("PriceValidity")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<int>("ProductCategoryId");
 
@@ -1744,15 +1746,15 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<string>("ShipmentTypes")
                         .IsRequired()
+                        .HasMaxLength(1);
+
+                    b.Property<string>("TermOfPayment")
+                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("PaymentTermId");
-
-                    b.HasIndex("PriceValidityId");
 
                     b.HasIndex("ProductCategoryId");
 
@@ -2133,14 +2135,6 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.Client", "ClientFk")
                         .WithMany()
                         .HasForeignKey("ClientId");
-
-                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.PaymentTerm", "PaymentTermFk")
-                        .WithMany()
-                        .HasForeignKey("PaymentTermId");
-
-                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.PriceValidity", "PriceValidityFk")
-                        .WithMany()
-                        .HasForeignKey("PriceValidityId");
 
                     b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.ProductCategory", "ProductCategoryFk")
                         .WithMany()

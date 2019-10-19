@@ -43,6 +43,16 @@ namespace MyCompanyName.AbpZeroTemplate
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditPaymentTermDto, PaymentTerm>();
+            configuration.CreateMap<PaymentTerm, CreateOrEditPaymentTermDto>();
+            configuration.CreateMap<PaymentTerm, PaymentTermDto>();
+
+
+            configuration.CreateMap<CreateOrEditPriceValidityDto, PriceValidity>();
+            configuration.CreateMap<PriceValidity, CreateOrEditPriceValidityDto>();
+            configuration.CreateMap<PriceValidity, PriceValidityDto>();
+
+
             configuration.CreateMap<CreateOrEditOrderedProductDto, OrderedProduct>();
             configuration.CreateMap<OrderedProduct, CreateOrEditOrderedProductDto>();
             configuration.CreateMap<OrderedProduct, OrderedProductDto>();

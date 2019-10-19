@@ -30,6 +30,20 @@ namespace MyCompanyName.AbpZeroTemplate.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var paymentTerms = pages.CreateChildPermission(AppPermissions.Pages_PaymentTerms, L("PaymentTerms"));
+            paymentTerms.CreateChildPermission(AppPermissions.Pages_PaymentTerms_Create, L("CreateNewPaymentTerm"));
+            paymentTerms.CreateChildPermission(AppPermissions.Pages_PaymentTerms_Edit, L("EditPaymentTerm"));
+            paymentTerms.CreateChildPermission(AppPermissions.Pages_PaymentTerms_Delete, L("DeletePaymentTerm"));
+
+
+
+            var priceValidities = pages.CreateChildPermission(AppPermissions.Pages_PriceValidities, L("PriceValidities"));
+            priceValidities.CreateChildPermission(AppPermissions.Pages_PriceValidities_Create, L("CreateNewPriceValidity"));
+            priceValidities.CreateChildPermission(AppPermissions.Pages_PriceValidities_Edit, L("EditPriceValidity"));
+            priceValidities.CreateChildPermission(AppPermissions.Pages_PriceValidities_Delete, L("DeletePriceValidity"));
+
+
+
             var orderedProducts = pages.CreateChildPermission(AppPermissions.Pages_OrderedProducts, L("OrderedProducts"));
             orderedProducts.CreateChildPermission(AppPermissions.Pages_OrderedProducts_Create, L("CreateNewOrderedProduct"));
             orderedProducts.CreateChildPermission(AppPermissions.Pages_OrderedProducts_Edit, L("EditOrderedProduct"));

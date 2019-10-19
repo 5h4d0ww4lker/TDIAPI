@@ -24,5 +24,11 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		
 		Task<PagedResultDto<QuotationClientLookupTableDto>> GetAllClientForLookupTable(GetAllForLookupTableInput input);
 		
+		Task<PagedResultDto<QuotationProductCategoryLookupTableDto>> GetAllProductCategoryForLookupTable(GetAllForLookupTableInput input);
+		
+		Task<PagedResultDto<QuotationPaymentTermLookupTableDto>> GetAllPaymentTermForLookupTable(GetAllForLookupTableInput input);
+		
+		Task<PagedResultDto<QuotationPriceValidityLookupTableDto>> GetAllPriceValidityForLookupTable(GetAllForLookupTableInput input);
+		
     }
 }

@@ -38,47 +38,9 @@
       }
     },
     {
-      "Name": "PriceValidity",
-      "Type": "string",
-      "MaxLength": 100,
-      "MinLength": 1,
-      "Range": {
-        "IsRangeSet": false,
-        "MinimumValue": 0,
-        "MaximumValue": 0
-      },
-      "Required": true,
-      "Nullable": false,
-      "Regex": "",
-      "UserInterface": {
-        "AdvancedFilter": true,
-        "List": true,
-        "CreateOrUpdate": true
-      }
-    },
-    {
-      "Name": "TermOfPayment",
-      "Type": "string",
-      "MaxLength": 100,
-      "MinLength": 1,
-      "Range": {
-        "IsRangeSet": false,
-        "MinimumValue": 0,
-        "MaximumValue": 0
-      },
-      "Required": true,
-      "Nullable": false,
-      "Regex": "",
-      "UserInterface": {
-        "AdvancedFilter": true,
-        "List": true,
-        "CreateOrUpdate": true
-      }
-    },
-    {
       "Name": "ShipmentTypes",
       "Type": "string",
-      "MaxLength": 1,
+      "MaxLength": 100,
       "MinLength": 1,
       "Range": {
         "IsRangeSet": false,
@@ -131,6 +93,25 @@
         "List": true,
         "CreateOrUpdate": true
       }
+    },
+    {
+      "Name": "PlaceOfDelivery",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
     }
   ],
   "NavigationProperties": [
@@ -141,6 +122,36 @@
       "IsNullable": true,
       "PropertyName": "ClientId",
       "DisplayPropertyName": "ClientName",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    },
+    {
+      "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
+      "ForeignEntityName": "ProductCategory",
+      "IdType": "int",
+      "IsNullable": false,
+      "PropertyName": "ProductCategoryId",
+      "DisplayPropertyName": "Material",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    },
+    {
+      "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
+      "ForeignEntityName": "PaymentTerm",
+      "IdType": "int",
+      "IsNullable": true,
+      "PropertyName": "PaymentTermId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    },
+    {
+      "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
+      "ForeignEntityName": "PriceValidity",
+      "IdType": "int",
+      "IsNullable": true,
+      "PropertyName": "PriceValidityId",
+      "DisplayPropertyName": "Description",
       "DuplicationNumber": 0,
       "RelationType": "single"
     }

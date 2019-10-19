@@ -13,16 +13,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		
 		
 		[Required]
-		[StringLength(QuotationConsts.MaxPriceValidityLength, MinimumLength = QuotationConsts.MinPriceValidityLength)]
-		public string PriceValidity { get; set; }
-		
-		
-		[Required]
-		[StringLength(QuotationConsts.MaxTermOfPaymentLength, MinimumLength = QuotationConsts.MinTermOfPaymentLength)]
-		public string TermOfPayment { get; set; }
-		
-		
-		[Required]
 		[StringLength(QuotationConsts.MaxShipmentTypesLength, MinimumLength = QuotationConsts.MinShipmentTypesLength)]
 		public string ShipmentTypes { get; set; }
 		
@@ -33,7 +23,16 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		public string DiscountInAmount { get; set; }
 		
 		
+		public string PlaceOfDelivery { get; set; }
+		
+		
 		 public int? ClientId { get; set; }
+		 
+		 		 public int ProductCategoryId { get; set; }
+		 
+		 		 public int? PaymentTermId { get; set; }
+		 
+		 		 public int? PriceValidityId { get; set; }
 		 
 		 
     }
