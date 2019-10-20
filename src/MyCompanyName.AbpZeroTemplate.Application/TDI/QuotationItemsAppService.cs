@@ -1,9 +1,6 @@
 using MyCompanyName.AbpZeroTemplate.TDI;
 using MyCompanyName.AbpZeroTemplate.TDI;
 using MyCompanyName.AbpZeroTemplate.TDI;
-using MyCompanyName.AbpZeroTemplate.TDI;
-using MyCompanyName.AbpZeroTemplate.TDI;
-using MyCompanyName.AbpZeroTemplate.TDI;
 
 
 using System;
@@ -32,21 +29,15 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		 private readonly IRepository<Quotation,int> _lookup_quotationRepository;
 		 private readonly IRepository<ProductCategory,int> _lookup_productCategoryRepository;
 		 private readonly IRepository<ProductSubCategory,int> _lookup_productSubCategoryRepository;
-		 private readonly IRepository<UnitPrice,int> _lookup_unitPriceRepository;
-		 private readonly IRepository<ClientUnitPrice,int> _lookup_clientUnitPriceRepository;
-		 private readonly IRepository<QuotationUnitPrice,int> _lookup_quotationUnitPriceRepository;
 		 
 
-		  public QuotationItemsAppService(IRepository<QuotationItem> quotationItemRepository, IQuotationItemsExcelExporter quotationItemsExcelExporter , IRepository<Quotation, int> lookup_quotationRepository, IRepository<ProductCategory, int> lookup_productCategoryRepository, IRepository<ProductSubCategory, int> lookup_productSubCategoryRepository, IRepository<UnitPrice, int> lookup_unitPriceRepository, IRepository<ClientUnitPrice, int> lookup_clientUnitPriceRepository, IRepository<QuotationUnitPrice, int> lookup_quotationUnitPriceRepository) 
+		  public QuotationItemsAppService(IRepository<QuotationItem> quotationItemRepository, IQuotationItemsExcelExporter quotationItemsExcelExporter , IRepository<Quotation, int> lookup_quotationRepository, IRepository<ProductCategory, int> lookup_productCategoryRepository, IRepository<ProductSubCategory, int> lookup_productSubCategoryRepository) 
 		  {
 			_quotationItemRepository = quotationItemRepository;
 			_quotationItemsExcelExporter = quotationItemsExcelExporter;
 			_lookup_quotationRepository = lookup_quotationRepository;
 		_lookup_productCategoryRepository = lookup_productCategoryRepository;
 		_lookup_productSubCategoryRepository = lookup_productSubCategoryRepository;
-		_lookup_unitPriceRepository = lookup_unitPriceRepository;
-		_lookup_clientUnitPriceRepository = lookup_clientUnitPriceRepository;
-		_lookup_quotationUnitPriceRepository = lookup_quotationUnitPriceRepository;
 		
 		  }
 
@@ -57,19 +48,14 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.Include( e => e.QuotationFk)
 						.Include( e => e.ProductCategoryFk)
 						.Include( e => e.ProductSubCategoryFk)
-						.Include( e => e.UnitPriceFk)
-						.Include( e => e.ClientUnitPriceFk)
-						.Include( e => e.QuotationUnitPriceFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.CustomUnitPrice.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuantityFilter),  e => e.Quantity.ToLower() == input.QuantityFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TotalAmountInETBFilter),  e => e.TotalAmountInETB.ToLower() == input.TotalAmountInETBFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.CustomUnitPriceFilter),  e => e.CustomUnitPrice.ToLower() == input.CustomUnitPriceFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationQuotationNumberFilter), e => e.QuotationFk != null && e.QuotationFk.QuotationNumber.ToLower() == input.QuotationQuotationNumberFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductSubCategoryPipeDiameterFilter), e => e.ProductSubCategoryFk != null && e.ProductSubCategoryFk.PipeDiameter.ToLower() == input.ProductSubCategoryPipeDiameterFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitPricePriceFilter), e => e.UnitPriceFk != null && e.UnitPriceFk.Price.ToLower() == input.UnitPricePriceFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ClientUnitPriceDescriptionFilter), e => e.ClientUnitPriceFk != null && e.ClientUnitPriceFk.Description.ToLower() == input.ClientUnitPriceDescriptionFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationUnitPriceDescriptionFilter), e => e.QuotationUnitPriceFk != null && e.QuotationUnitPriceFk.Description.ToLower() == input.QuotationUnitPriceDescriptionFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductSubCategoryPipeDiameterFilter), e => e.ProductSubCategoryFk != null && e.ProductSubCategoryFk.PipeDiameter.ToLower() == input.ProductSubCategoryPipeDiameterFilter.ToLower().Trim());
 
 			var pagedAndFilteredQuotationItems = filteredQuotationItems
                 .OrderBy(input.Sorting ?? "id asc")
@@ -85,29 +71,18 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                          join o3 in _lookup_productSubCategoryRepository.GetAll() on o.ProductSubCategoryId equals o3.Id into j3
                          from s3 in j3.DefaultIfEmpty()
                          
-                         join o4 in _lookup_unitPriceRepository.GetAll() on o.UnitPriceId equals o4.Id into j4
-                         from s4 in j4.DefaultIfEmpty()
-                         
-                         join o5 in _lookup_clientUnitPriceRepository.GetAll() on o.ClientUnitPriceId equals o5.Id into j5
-                         from s5 in j5.DefaultIfEmpty()
-                         
-                         join o6 in _lookup_quotationUnitPriceRepository.GetAll() on o.QuotationUnitPriceId equals o6.Id into j6
-                         from s6 in j6.DefaultIfEmpty()
-                         
                          select new GetQuotationItemForViewDto() {
 							QuotationItem = new QuotationItemDto
 							{
                                 Quantity = o.Quantity,
                                 TotalAmountInETB = o.TotalAmountInETB,
                                 Description = o.Description,
+                                CustomUnitPrice = o.CustomUnitPrice,
                                 Id = o.Id
 							},
                          	QuotationQuotationNumber = s1 == null ? "" : s1.QuotationNumber.ToString(),
                          	ProductCategoryMaterial = s2 == null ? "" : s2.Material.ToString(),
-                         	ProductSubCategoryPipeDiameter = s3 == null ? "" : s3.PipeDiameter.ToString(),
-                         	UnitPricePrice = s4 == null ? "" : s4.Price.ToString(),
-                         	ClientUnitPriceDescription = s5 == null ? "" : s5.Description.ToString(),
-                         	QuotationUnitPriceDescription = s6 == null ? "" : s6.Description.ToString()
+                         	ProductSubCategoryPipeDiameter = s3 == null ? "" : s3.PipeDiameter.ToString()
 						};
 
             var totalCount = await filteredQuotationItems.CountAsync();
@@ -141,24 +116,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                 var _lookupProductSubCategory = await _lookup_productSubCategoryRepository.FirstOrDefaultAsync((int)output.QuotationItem.ProductSubCategoryId);
                 output.ProductSubCategoryPipeDiameter = _lookupProductSubCategory.PipeDiameter.ToString();
             }
-
-		    if (output.QuotationItem.UnitPriceId != null)
-            {
-                var _lookupUnitPrice = await _lookup_unitPriceRepository.FirstOrDefaultAsync((int)output.QuotationItem.UnitPriceId);
-                output.UnitPricePrice = _lookupUnitPrice.Price.ToString();
-            }
-
-		    if (output.QuotationItem.ClientUnitPriceId != null)
-            {
-                var _lookupClientUnitPrice = await _lookup_clientUnitPriceRepository.FirstOrDefaultAsync((int)output.QuotationItem.ClientUnitPriceId);
-                output.ClientUnitPriceDescription = _lookupClientUnitPrice.Description.ToString();
-            }
-
-		    if (output.QuotationItem.QuotationUnitPriceId != null)
-            {
-                var _lookupQuotationUnitPrice = await _lookup_quotationUnitPriceRepository.FirstOrDefaultAsync((int)output.QuotationItem.QuotationUnitPriceId);
-                output.QuotationUnitPriceDescription = _lookupQuotationUnitPrice.Description.ToString();
-            }
 			
             return output;
          }
@@ -186,24 +143,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
             {
                 var _lookupProductSubCategory = await _lookup_productSubCategoryRepository.FirstOrDefaultAsync((int)output.QuotationItem.ProductSubCategoryId);
                 output.ProductSubCategoryPipeDiameter = _lookupProductSubCategory.PipeDiameter.ToString();
-            }
-
-		    if (output.QuotationItem.UnitPriceId != null)
-            {
-                var _lookupUnitPrice = await _lookup_unitPriceRepository.FirstOrDefaultAsync((int)output.QuotationItem.UnitPriceId);
-                output.UnitPricePrice = _lookupUnitPrice.Price.ToString();
-            }
-
-		    if (output.QuotationItem.ClientUnitPriceId != null)
-            {
-                var _lookupClientUnitPrice = await _lookup_clientUnitPriceRepository.FirstOrDefaultAsync((int)output.QuotationItem.ClientUnitPriceId);
-                output.ClientUnitPriceDescription = _lookupClientUnitPrice.Description.ToString();
-            }
-
-		    if (output.QuotationItem.QuotationUnitPriceId != null)
-            {
-                var _lookupQuotationUnitPrice = await _lookup_quotationUnitPriceRepository.FirstOrDefaultAsync((int)output.QuotationItem.QuotationUnitPriceId);
-                output.QuotationUnitPriceDescription = _lookupQuotationUnitPrice.Description.ToString();
             }
 			
             return output;
@@ -249,19 +188,14 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.Include( e => e.QuotationFk)
 						.Include( e => e.ProductCategoryFk)
 						.Include( e => e.ProductSubCategoryFk)
-						.Include( e => e.UnitPriceFk)
-						.Include( e => e.ClientUnitPriceFk)
-						.Include( e => e.QuotationUnitPriceFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Quantity.Contains(input.Filter) || e.TotalAmountInETB.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.CustomUnitPrice.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuantityFilter),  e => e.Quantity.ToLower() == input.QuantityFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TotalAmountInETBFilter),  e => e.TotalAmountInETB.ToLower() == input.TotalAmountInETBFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DescriptionFilter),  e => e.Description.ToLower() == input.DescriptionFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.CustomUnitPriceFilter),  e => e.CustomUnitPrice.ToLower() == input.CustomUnitPriceFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationQuotationNumberFilter), e => e.QuotationFk != null && e.QuotationFk.QuotationNumber.ToLower() == input.QuotationQuotationNumberFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductSubCategoryPipeDiameterFilter), e => e.ProductSubCategoryFk != null && e.ProductSubCategoryFk.PipeDiameter.ToLower() == input.ProductSubCategoryPipeDiameterFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.UnitPricePriceFilter), e => e.UnitPriceFk != null && e.UnitPriceFk.Price.ToLower() == input.UnitPricePriceFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.ClientUnitPriceDescriptionFilter), e => e.ClientUnitPriceFk != null && e.ClientUnitPriceFk.Description.ToLower() == input.ClientUnitPriceDescriptionFilter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationUnitPriceDescriptionFilter), e => e.QuotationUnitPriceFk != null && e.QuotationUnitPriceFk.Description.ToLower() == input.QuotationUnitPriceDescriptionFilter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductSubCategoryPipeDiameterFilter), e => e.ProductSubCategoryFk != null && e.ProductSubCategoryFk.PipeDiameter.ToLower() == input.ProductSubCategoryPipeDiameterFilter.ToLower().Trim());
 
 			var query = (from o in filteredQuotationItems
                          join o1 in _lookup_quotationRepository.GetAll() on o.QuotationId equals o1.Id into j1
@@ -273,29 +207,18 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                          join o3 in _lookup_productSubCategoryRepository.GetAll() on o.ProductSubCategoryId equals o3.Id into j3
                          from s3 in j3.DefaultIfEmpty()
                          
-                         join o4 in _lookup_unitPriceRepository.GetAll() on o.UnitPriceId equals o4.Id into j4
-                         from s4 in j4.DefaultIfEmpty()
-                         
-                         join o5 in _lookup_clientUnitPriceRepository.GetAll() on o.ClientUnitPriceId equals o5.Id into j5
-                         from s5 in j5.DefaultIfEmpty()
-                         
-                         join o6 in _lookup_quotationUnitPriceRepository.GetAll() on o.QuotationUnitPriceId equals o6.Id into j6
-                         from s6 in j6.DefaultIfEmpty()
-                         
                          select new GetQuotationItemForViewDto() { 
 							QuotationItem = new QuotationItemDto
 							{
                                 Quantity = o.Quantity,
                                 TotalAmountInETB = o.TotalAmountInETB,
                                 Description = o.Description,
+                                CustomUnitPrice = o.CustomUnitPrice,
                                 Id = o.Id
 							},
                          	QuotationQuotationNumber = s1 == null ? "" : s1.QuotationNumber.ToString(),
                          	ProductCategoryMaterial = s2 == null ? "" : s2.Material.ToString(),
-                         	ProductSubCategoryPipeDiameter = s3 == null ? "" : s3.PipeDiameter.ToString(),
-                         	UnitPricePrice = s4 == null ? "" : s4.Price.ToString(),
-                         	ClientUnitPriceDescription = s5 == null ? "" : s5.Description.ToString(),
-                         	QuotationUnitPriceDescription = s6 == null ? "" : s6.Description.ToString()
+                         	ProductSubCategoryPipeDiameter = s3 == null ? "" : s3.PipeDiameter.ToString()
 						 });
 
 
@@ -383,98 +306,18 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 				lookupTableDtoList.Add(new QuotationItemProductSubCategoryLookupTableDto
 				{
 					Id = productSubCategory.Id,
-					DisplayName = productSubCategory.PipeDiameter?.ToString()
-				});
+					DisplayName = productSubCategory.PipeDiameter?.ToString(),
+                    WallS = productSubCategory.WallS?.ToString(),
+                    PN = productSubCategory.PN?.ToString(),
+                    UnitPrice = productSubCategory.UnitPrice?.ToString(),
+                    WPM = productSubCategory.WPM?.ToString(),
+                    Extruder = productSubCategory.Extruder?.ToString(),
+                    PipeHead = productSubCategory.PipeHead?.ToString()
+
+                });
 			}
 
             return new PagedResultDto<QuotationItemProductSubCategoryLookupTableDto>(
-                totalCount,
-                lookupTableDtoList
-            );
-         }
-
-		[AbpAuthorize(AppPermissions.Pages_QuotationItems)]
-         public async Task<PagedResultDto<QuotationItemUnitPriceLookupTableDto>> GetAllUnitPriceForLookupTable(GetAllForLookupTableInput input)
-         {
-             var query = _lookup_unitPriceRepository.GetAll().WhereIf(
-                    !string.IsNullOrWhiteSpace(input.Filter),
-                   e=> e.Price.ToString().Contains(input.Filter)
-                );
-
-            var totalCount = await query.CountAsync();
-
-            var unitPriceList = await query
-                .PageBy(input)
-                .ToListAsync();
-
-			var lookupTableDtoList = new List<QuotationItemUnitPriceLookupTableDto>();
-			foreach(var unitPrice in unitPriceList){
-				lookupTableDtoList.Add(new QuotationItemUnitPriceLookupTableDto
-				{
-					Id = unitPrice.Id,
-					DisplayName = unitPrice.Price?.ToString()
-				});
-			}
-
-            return new PagedResultDto<QuotationItemUnitPriceLookupTableDto>(
-                totalCount,
-                lookupTableDtoList
-            );
-         }
-
-		[AbpAuthorize(AppPermissions.Pages_QuotationItems)]
-         public async Task<PagedResultDto<QuotationItemClientUnitPriceLookupTableDto>> GetAllClientUnitPriceForLookupTable(GetAllForLookupTableInput input)
-         {
-             var query = _lookup_clientUnitPriceRepository.GetAll().WhereIf(
-                    !string.IsNullOrWhiteSpace(input.Filter),
-                   e=> e.Description.ToString().Contains(input.Filter)
-                );
-
-            var totalCount = await query.CountAsync();
-
-            var clientUnitPriceList = await query
-                .PageBy(input)
-                .ToListAsync();
-
-			var lookupTableDtoList = new List<QuotationItemClientUnitPriceLookupTableDto>();
-			foreach(var clientUnitPrice in clientUnitPriceList){
-				lookupTableDtoList.Add(new QuotationItemClientUnitPriceLookupTableDto
-				{
-					Id = clientUnitPrice.Id,
-					DisplayName = clientUnitPrice.Description?.ToString()
-				});
-			}
-
-            return new PagedResultDto<QuotationItemClientUnitPriceLookupTableDto>(
-                totalCount,
-                lookupTableDtoList
-            );
-         }
-
-		[AbpAuthorize(AppPermissions.Pages_QuotationItems)]
-         public async Task<PagedResultDto<QuotationItemQuotationUnitPriceLookupTableDto>> GetAllQuotationUnitPriceForLookupTable(GetAllForLookupTableInput input)
-         {
-             var query = _lookup_quotationUnitPriceRepository.GetAll().WhereIf(
-                    !string.IsNullOrWhiteSpace(input.Filter),
-                   e=> e.Description.ToString().Contains(input.Filter)
-                );
-
-            var totalCount = await query.CountAsync();
-
-            var quotationUnitPriceList = await query
-                .PageBy(input)
-                .ToListAsync();
-
-			var lookupTableDtoList = new List<QuotationItemQuotationUnitPriceLookupTableDto>();
-			foreach(var quotationUnitPrice in quotationUnitPriceList){
-				lookupTableDtoList.Add(new QuotationItemQuotationUnitPriceLookupTableDto
-				{
-					Id = quotationUnitPrice.Id,
-					DisplayName = quotationUnitPrice.Description?.ToString()
-				});
-			}
-
-            return new PagedResultDto<QuotationItemQuotationUnitPriceLookupTableDto>(
                 totalCount,
                 lookupTableDtoList
             );

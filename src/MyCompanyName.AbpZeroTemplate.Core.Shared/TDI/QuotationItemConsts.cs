@@ -12,5 +12,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		public const int MinDescriptionLength = 1;
 		public const int MaxDescriptionLength = 100;
 						
+		public const int MinCustomUnitPriceLength = 1;
+		public const int MaxCustomUnitPriceLength = 100;
+						
     }
 }

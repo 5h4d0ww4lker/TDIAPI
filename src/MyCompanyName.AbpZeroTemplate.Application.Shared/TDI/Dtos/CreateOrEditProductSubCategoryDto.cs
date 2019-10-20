@@ -72,6 +72,11 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		public string PipeHead { get; set; }
 		
 		
+		[Required]
+		[StringLength(ProductSubCategoryConsts.MaxUnitPriceLength, MinimumLength = ProductSubCategoryConsts.MinUnitPriceLength)]
+		public string UnitPrice { get; set; }
+		
+		
 		 public int ProductCategoryId { get; set; }
 		 
 		 

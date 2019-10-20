@@ -48,6 +48,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
                         L("PipeLengthM"),
                         L("Extruder"),
                         L("PipeHead"),
+                        L("UnitPrice"),
                         (L("ProductCategory")) + L("Material")
                         );
 
@@ -66,6 +67,7 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
                         _ => _.ProductSubCategory.PipeLengthM,
                         _ => _.ProductSubCategory.Extruder,
                         _ => _.ProductSubCategory.PipeHead,
+                        _ => _.ProductSubCategory.UnitPrice,
                         _ => _.ProductCategoryMaterial
                         );
 

@@ -1,9 +1,6 @@
 using MyCompanyName.AbpZeroTemplate.TDI;
 using MyCompanyName.AbpZeroTemplate.TDI;
 using MyCompanyName.AbpZeroTemplate.TDI;
-using MyCompanyName.AbpZeroTemplate.TDI;
-using MyCompanyName.AbpZeroTemplate.TDI;
-using MyCompanyName.AbpZeroTemplate.TDI;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,6 +25,9 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		[StringLength(QuotationItemConsts.MaxDescriptionLength, MinimumLength = QuotationItemConsts.MinDescriptionLength)]
 		public virtual string Description { get; set; }
 		
+		[StringLength(QuotationItemConsts.MaxCustomUnitPriceLength, MinimumLength = QuotationItemConsts.MinCustomUnitPriceLength)]
+		public virtual string CustomUnitPrice { get; set; }
+		
 
 		public virtual int? QuotationId { get; set; }
 		
@@ -43,21 +43,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		
         [ForeignKey("ProductSubCategoryId")]
 		public ProductSubCategory ProductSubCategoryFk { get; set; }
-		
-		public virtual int? UnitPriceId { get; set; }
-		
-        [ForeignKey("UnitPriceId")]
-		public UnitPrice UnitPriceFk { get; set; }
-		
-		public virtual int? ClientUnitPriceId { get; set; }
-		
-        [ForeignKey("ClientUnitPriceId")]
-		public ClientUnitPrice ClientUnitPriceFk { get; set; }
-		
-		public virtual int? QuotationUnitPriceId { get; set; }
-		
-        [ForeignKey("QuotationUnitPriceId")]
-		public QuotationUnitPrice QuotationUnitPriceFk { get; set; }
 		
     }
 }

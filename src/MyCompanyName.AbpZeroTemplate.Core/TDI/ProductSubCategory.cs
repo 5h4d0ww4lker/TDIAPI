@@ -62,6 +62,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		[StringLength(ProductSubCategoryConsts.MaxPipeHeadLength, MinimumLength = ProductSubCategoryConsts.MinPipeHeadLength)]
 		public virtual string PipeHead { get; set; }
 		
+		[Required]
+		[StringLength(ProductSubCategoryConsts.MaxUnitPriceLength, MinimumLength = ProductSubCategoryConsts.MinUnitPriceLength)]
+		public virtual string UnitPrice { get; set; }
+		
 
 		public virtual int ProductCategoryId { get; set; }
 		

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="PaymentTermDescription">Payment term description</text>
+  <texts>    <text name="CustomUnitPrice">Custom unit price</text>
+    <text name="PaymentTermDescription">Payment term description</text>
     <text name="PickPaymentTerm">Pick payment term</text>
     <text name="PriceValidityDescription">Price validity description</text>
     <text name="PickPriceValidity">Pick price validity</text>

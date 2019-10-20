@@ -74,6 +74,25 @@
         "List": true,
         "CreateOrUpdate": true
       }
+    },
+    {
+      "Name": "CustomUnitPrice",
+      "Type": "string",
+      "MaxLength": 100,
+      "MinLength": 1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
     }
   ],
   "NavigationProperties": [
@@ -104,36 +123,6 @@
       "IsNullable": true,
       "PropertyName": "ProductSubCategoryId",
       "DisplayPropertyName": "PipeDiameter",
-      "DuplicationNumber": 0,
-      "RelationType": "single"
-    },
-    {
-      "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
-      "ForeignEntityName": "UnitPrice",
-      "IdType": "int",
-      "IsNullable": true,
-      "PropertyName": "UnitPriceId",
-      "DisplayPropertyName": "Price",
-      "DuplicationNumber": 0,
-      "RelationType": "single"
-    },
-    {
-      "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
-      "ForeignEntityName": "ClientUnitPrice",
-      "IdType": "int",
-      "IsNullable": true,
-      "PropertyName": "ClientUnitPriceId",
-      "DisplayPropertyName": "Description",
-      "DuplicationNumber": 0,
-      "RelationType": "single"
-    },
-    {
-      "Namespace": "MyCompanyName.AbpZeroTemplate.TDI",
-      "ForeignEntityName": "QuotationUnitPrice",
-      "IdType": "int",
-      "IsNullable": true,
-      "PropertyName": "QuotationUnitPriceId",
-      "DisplayPropertyName": "Description",
       "DuplicationNumber": 0,
       "RelationType": "single"
     }

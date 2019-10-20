@@ -42,5 +42,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		public const int MinPipeHeadLength = 1;
 		public const int MaxPipeHeadLength = 100;
 						
+		public const int MinUnitPriceLength = 1;
+		public const int MaxUnitPriceLength = 100;
+						
     }
 }

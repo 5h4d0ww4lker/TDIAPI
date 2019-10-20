@@ -33,6 +33,8 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string PipeHeadFilter { get; set; }
 
+		public string UnitPriceFilter { get; set; }
+
 
 		 public string ProductCategoryMaterialFilter { get; set; }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyCompanyName.AbpZeroTemplate.EntityFrameworkCore;
 
 namespace MyCompanyName.AbpZeroTemplate.Migrations
 {
     [DbContext(typeof(AbpZeroTemplateDbContext))]
-    partial class AbpZeroTemplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191019193652_Regenerated_ProductSubCategory7578")]
+    partial class Regenerated_ProductSubCategory7578
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1769,12 +1771,11 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ClientUnitPriceId");
+
                     b.Property<DateTime>("CreationTime");
 
                     b.Property<long?>("CreatorUserId");
-
-                    b.Property<string>("CustomUnitPrice")
-                        .HasMaxLength(100);
 
                     b.Property<long?>("DeleterUserId");
 
@@ -1800,17 +1801,27 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<int?>("QuotationId");
 
+                    b.Property<int?>("QuotationUnitPriceId");
+
                     b.Property<string>("TotalAmountInETB")
                         .IsRequired()
                         .HasMaxLength(100);
 
+                    b.Property<int?>("UnitPriceId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientUnitPriceId");
 
                     b.HasIndex("ProductCategoryId");
 
                     b.HasIndex("ProductSubCategoryId");
 
                     b.HasIndex("QuotationId");
+
+                    b.HasIndex("QuotationUnitPriceId");
+
+                    b.HasIndex("UnitPriceId");
 
                     b.ToTable("QuotationItems");
                 });
@@ -2145,6 +2156,10 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.TDI.QuotationItem", b =>
                 {
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.ClientUnitPrice", "ClientUnitPriceFk")
+                        .WithMany()
+                        .HasForeignKey("ClientUnitPriceId");
+
                     b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.ProductCategory", "ProductCategoryFk")
                         .WithMany()
                         .HasForeignKey("ProductCategoryId");
@@ -2156,6 +2171,14 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.Quotation", "QuotationFk")
                         .WithMany()
                         .HasForeignKey("QuotationId");
+
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.QuotationUnitPrice", "QuotationUnitPriceFk")
+                        .WithMany()
+                        .HasForeignKey("QuotationUnitPriceId");
+
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.TDI.UnitPrice", "UnitPriceFk")
+                        .WithMany()
+                        .HasForeignKey("UnitPriceId");
                 });
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.TDI.QuotationUnitPrice", b =>

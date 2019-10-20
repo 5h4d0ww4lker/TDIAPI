@@ -10,12 +10,6 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string ProductSubCategoryPipeDiameter { get; set;}
 
-		public string UnitPricePrice { get; set;}
-
-		public string ClientUnitPriceDescription { get; set;}
-
-		public string QuotationUnitPriceDescription { get; set;}
-
 
     }
 }

@@ -38,12 +38,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
                         L("Quantity"),
                         L("TotalAmountInETB"),
                         L("Description"),
+                        L("CustomUnitPrice"),
                         (L("Quotation")) + L("QuotationNumber"),
                         (L("ProductCategory")) + L("Material"),
-                        (L("ProductSubCategory")) + L("PipeDiameter"),
-                        (L("UnitPrice")) + L("Price"),
-                        (L("ClientUnitPrice")) + L("Description"),
-                        (L("QuotationUnitPrice")) + L("Description")
+                        (L("ProductSubCategory")) + L("PipeDiameter")
                         );
 
                     AddObjects(
@@ -51,12 +49,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Exporting
                         _ => _.QuotationItem.Quantity,
                         _ => _.QuotationItem.TotalAmountInETB,
                         _ => _.QuotationItem.Description,
+                        _ => _.QuotationItem.CustomUnitPrice,
                         _ => _.QuotationQuotationNumber,
                         _ => _.ProductCategoryMaterial,
-                        _ => _.ProductSubCategoryPipeDiameter,
-                        _ => _.UnitPricePrice,
-                        _ => _.ClientUnitPriceDescription,
-                        _ => _.QuotationUnitPriceDescription
+                        _ => _.ProductSubCategoryPipeDiameter
                         );
 
 					
