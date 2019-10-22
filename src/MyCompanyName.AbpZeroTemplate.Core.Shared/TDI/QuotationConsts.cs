@@ -10,5 +10,10 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						
 						
 						
+		public const int MinStatusLength = 1;
+		public const int MaxStatusLength = 100;
+						
+						
+						
     }
 }

@@ -52,12 +52,15 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.Include( e => e.ProductCategoryFk)
 						.Include( e => e.PaymentTermFk)
 						.Include( e => e.PriceValidityFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.QuotationNumber.Contains(input.Filter) || e.ShipmentTypes.Contains(input.Filter) || e.DiscountInPercent.Contains(input.Filter) || e.DiscountInAmount.Contains(input.Filter) || e.PlaceOfDelivery.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.QuotationNumber.Contains(input.Filter) || e.ShipmentTypes.Contains(input.Filter) || e.DiscountInPercent.Contains(input.Filter) || e.DiscountInAmount.Contains(input.Filter) || e.PlaceOfDelivery.Contains(input.Filter) || e.Status.Contains(input.Filter) || e.CheckedBy.Contains(input.Filter) || e.ApprovedBy.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationNumberFilter),  e => e.QuotationNumber.ToLower() == input.QuotationNumberFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ShipmentTypesFilter),  e => e.ShipmentTypes.ToLower() == input.ShipmentTypesFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DiscountInPercentFilter),  e => e.DiscountInPercent.ToLower() == input.DiscountInPercentFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DiscountInAmountFilter),  e => e.DiscountInAmount.ToLower() == input.DiscountInAmountFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceOfDeliveryFilter),  e => e.PlaceOfDelivery.ToLower() == input.PlaceOfDeliveryFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.StatusFilter),  e => e.Status.ToLower() == input.StatusFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.CheckedByFilter),  e => e.CheckedBy.ToLower() == input.CheckedByFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ApprovedByFilter),  e => e.ApprovedBy.ToLower() == input.ApprovedByFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ClientClientNameFilter), e => e.ClientFk != null && e.ClientFk.ClientName.ToLower() == input.ClientClientNameFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PaymentTermDescriptionFilter), e => e.PaymentTermFk != null && e.PaymentTermFk.Description.ToLower() == input.PaymentTermDescriptionFilter.ToLower().Trim())
@@ -88,6 +91,9 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                                 DiscountInPercent = o.DiscountInPercent,
                                 DiscountInAmount = o.DiscountInAmount,
                                 PlaceOfDelivery = o.PlaceOfDelivery,
+                                Status = o.Status,
+                                CheckedBy = o.CheckedBy,
+                                ApprovedBy = o.ApprovedBy,
                                 Id = o.Id
 							},
                          	ClientClientName = s1 == null ? "" : s1.ClientName.ToString(),
@@ -212,12 +218,15 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 						.Include( e => e.ProductCategoryFk)
 						.Include( e => e.PaymentTermFk)
 						.Include( e => e.PriceValidityFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.QuotationNumber.Contains(input.Filter) || e.ShipmentTypes.Contains(input.Filter) || e.DiscountInPercent.Contains(input.Filter) || e.DiscountInAmount.Contains(input.Filter) || e.PlaceOfDelivery.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.QuotationNumber.Contains(input.Filter) || e.ShipmentTypes.Contains(input.Filter) || e.DiscountInPercent.Contains(input.Filter) || e.DiscountInAmount.Contains(input.Filter) || e.PlaceOfDelivery.Contains(input.Filter) || e.Status.Contains(input.Filter) || e.CheckedBy.Contains(input.Filter) || e.ApprovedBy.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.QuotationNumberFilter),  e => e.QuotationNumber.ToLower() == input.QuotationNumberFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ShipmentTypesFilter),  e => e.ShipmentTypes.ToLower() == input.ShipmentTypesFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DiscountInPercentFilter),  e => e.DiscountInPercent.ToLower() == input.DiscountInPercentFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.DiscountInAmountFilter),  e => e.DiscountInAmount.ToLower() == input.DiscountInAmountFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceOfDeliveryFilter),  e => e.PlaceOfDelivery.ToLower() == input.PlaceOfDeliveryFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.StatusFilter),  e => e.Status.ToLower() == input.StatusFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.CheckedByFilter),  e => e.CheckedBy.ToLower() == input.CheckedByFilter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ApprovedByFilter),  e => e.ApprovedBy.ToLower() == input.ApprovedByFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ClientClientNameFilter), e => e.ClientFk != null && e.ClientFk.ClientName.ToLower() == input.ClientClientNameFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductCategoryMaterialFilter), e => e.ProductCategoryFk != null && e.ProductCategoryFk.Material.ToLower() == input.ProductCategoryMaterialFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PaymentTermDescriptionFilter), e => e.PaymentTermFk != null && e.PaymentTermFk.Description.ToLower() == input.PaymentTermDescriptionFilter.ToLower().Trim())
@@ -244,6 +253,9 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
                                 DiscountInPercent = o.DiscountInPercent,
                                 DiscountInAmount = o.DiscountInAmount,
                                 PlaceOfDelivery = o.PlaceOfDelivery,
+                                Status = o.Status,
+                                CheckedBy = o.CheckedBy,
+                                ApprovedBy = o.ApprovedBy,
                                 Id = o.Id
 							},
                          	ClientClientName = s1 == null ? "" : s1.ClientName.ToString(),

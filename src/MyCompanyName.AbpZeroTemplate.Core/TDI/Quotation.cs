@@ -29,6 +29,14 @@ namespace MyCompanyName.AbpZeroTemplate.TDI
 		
 		public virtual string PlaceOfDelivery { get; set; }
 		
+		[Required]
+		[StringLength(QuotationConsts.MaxStatusLength, MinimumLength = QuotationConsts.MinStatusLength)]
+		public virtual string Status { get; set; }
+		
+		public virtual string CheckedBy { get; set; }
+		
+		public virtual string ApprovedBy { get; set; }
+		
 
 		public virtual int? ClientId { get; set; }
 		

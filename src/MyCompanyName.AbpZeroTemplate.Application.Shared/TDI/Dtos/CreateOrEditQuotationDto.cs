@@ -26,6 +26,17 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 		public string PlaceOfDelivery { get; set; }
 		
 		
+		[Required]
+		[StringLength(QuotationConsts.MaxStatusLength, MinimumLength = QuotationConsts.MinStatusLength)]
+		public string Status { get; set; }
+		
+		
+		public string CheckedBy { get; set; }
+		
+		
+		public string ApprovedBy { get; set; }
+		
+		
 		 public int? ClientId { get; set; }
 		 
 		 		 public int ProductCategoryId { get; set; }

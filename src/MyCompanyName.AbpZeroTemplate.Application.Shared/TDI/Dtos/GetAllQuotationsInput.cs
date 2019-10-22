@@ -17,6 +17,12 @@ namespace MyCompanyName.AbpZeroTemplate.TDI.Dtos
 
 		public string PlaceOfDeliveryFilter { get; set; }
 
+		public string StatusFilter { get; set; }
+
+		public string CheckedByFilter { get; set; }
+
+		public string ApprovedByFilter { get; set; }
+
 
 		 public string ClientClientNameFilter { get; set; }
 
